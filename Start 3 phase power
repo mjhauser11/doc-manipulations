@@ -1,0 +1,21 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+
+data = pd.read_excel("C:\\Users\\223117394\\Documents\\Hioki Power Scope test 1.xlsx")
+data = np.array(data)
+#print(data)
+PFa = data[18,[1,2,3,4,5,6]]
+print(PFa)
+size = len(PFa)
+print(size)
+Angle = []
+i=0
+for i in range(0,size,1):
+    Angle_a = math.acos(PFa[i-1])*100
+    Angle_a = round(Angle_a)
+    Angle_a = np.array(Angle_a)
+    print(Angle_a)
+    np.append(x,i,Angle_a)
+print(x)
