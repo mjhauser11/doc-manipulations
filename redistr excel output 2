@@ -1,0 +1,24 @@
+import openpyxl
+path = "C:\\Users\\223117394\\PDUthermaltest10_31.xlsx"
+wb_obj = openpyxl.load_workbook(path)
+sheet_obj = wb_obj.active
+
+    
+cell_obj=sheet_obj.cell(row=1,column=1)
+
+
+print(cell_obj.value[0])
+import pandas as pd
+df = pd.DataFrame()
+df['Scan'] = cell_obj.value[0::3]
+df['Time'] = cell_obj.value[1::3]
+df['102 (deg C)'] = cell_obj.value[2::3]
+df.to_excel('result.xlsx', index = False)
+data = pd.read_excel("C:\\Users\\223117394\\PDUthermaltest10_31.xlsx", sheet_name= 2, header=None, dtype="string")
+print(data.iloc[0])
+print(data.iloc[1])
+data.dropna(inplace=True)
+new = data[0].str.split(",", n = 9, expand = True)
+new.columns = ['Scan', 'Time', 'Ambient Temp 102(deg C)', 'Alarm 102', 'Inlet Temp 103(deg C)', 'Alarm 103', 'AR Outlet Temp 104 (deg C)', 'Alarm 104', 'PDU Outlet Temp 105 (deg C)', 'Alarm 105']
+print(new)
+new.to_excel('results2.xlsx', index = False)
