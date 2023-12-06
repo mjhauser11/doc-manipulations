@@ -1,0 +1,46 @@
+import matplotlib as plt
+from matplotlib import pyplot as plot
+import pandas as pd
+import numpy as np
+pd.read_csv('C:\\Users\\223117394\\pdu.csv')
+data=pd.read_csv('C:\\Users\\223117394\\pdu.csv')
+data.head()
+x=data.to_numpy()
+print(x)
+
+plot.scatter(x[1,:],x[0,:], c='pink',label='NGPDU92')
+plot.scatter(x[3,:],x[2,:], c='blue', label='HEPDU')
+from sklearn.linear_model import LinearRegression
+model1 = LinearRegression()
+model2=LinearRegression()
+y1=x[0,:].reshape(len(x)+1,1)
+m1=x[1,:].reshape(len(x)+1,1)
+y2=x[2,:].reshape(len(x)+1,1)
+m2=x[3,:].reshape(len(x)+1,1)
+model1.fit(m1,y1)
+model2.fit(m2,y2)
+y11 = model1.predict(m1)
+y22 = model2.predict(m2)
+plot.plot(m1,y11,'r')
+plot.plot(m2,y22,'g')
+
+a = x[1,:]
+b = x[0,:]
+c = x[3,:]
+d = x[2,:]
+z = np.polyfit(a,b, 3)
+z2= np.polyfit(c,d,3)
+p1 = np.poly1d(z)
+p2 = np.poly1d(z2)
+xp = np.linspace(-2,6,100)
+
+
+plot.plot(a,p1(a), '--')
+plot.plot(c,p2(c), '-')
+
+plot.legend()
+plot.text(15,85, '$Y=9E-5x^3-0.0168x^2+1.5827x+13.926$', fontsize = 10)
+plot.text(35,40, '$Y=6E-5x^3-0.0132x^2+1.1276x+13.214$', fontsize = 10)
+plot.ylabel("Drop Voltage (V)")
+plot.xlabel("Power (W)")
+plot.title("Output Power versus Voltage Lost")
