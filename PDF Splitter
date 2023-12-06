@@ -1,0 +1,36 @@
+import PyPDF2
+from PyPDF2 import PdfReader, PdfWriter
+
+file1 = r"C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\python docs\Failed certs X22318 & X24894.pdf"
+file2 = r'C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\python docs\Failed certs X22318 & X24894 - 2.pdf'
+read1 = PdfReader(file1)
+read2 = PdfReader(file2)
+Write1 = PdfWriter()
+Write2 = PdfWriter()
+
+def PDFsplit(pdf, splits):
+    pdfFileObj = open(pdf, 'rb')
+    pdfReader = PyPDF2.PdfReader(pdfFileObj)
+    start = 0
+    end = splits[0]
+    for i in range(len(splits)+1):
+        pdfWriter = PyPDF2.PdfWriter()
+        outputpdf = pdf.split('.pdf')[0]+str(i)+'.pdf'
+        for page in range(start, end):
+            pdfWriter.add_page(pdfReader.pages[page])
+            with open(outputpdf, "wb") as f:
+                pdfWriter.write(f)
+            start = end
+            try: 
+                end = splits[i+1]
+            except IndexError:
+                end = len(pdfReader.pages)
+    pdfFileObj.close()
+def main():
+    pdf = r"C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\python docs\Failed certs X22318 & X24894.pdf"
+    splits = [3]
+    PDFsplit(pdf, splits)
+    
+if __name__=="__main__":
+    main()
+            
