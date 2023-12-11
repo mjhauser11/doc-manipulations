@@ -1,0 +1,18 @@
+import PyPDF2
+def PDFmerge(pdfs, outputs):
+    pdfMerger = PyPDF2.PdfMerger()
+    for pdf in pdfs:
+        pdfMerger.append(pdf)
+        with open(outputs,'wb') as f:
+            pdfMerger.write(f)
+def main():
+    pdf1 = r'C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\PDU\NGPDU-92\part1final.pdf'
+    
+    pdf2 = r'C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\PDU\NGPDU-92\part2final.pdf'
+    
+    
+    pdfs = [pdf1, pdf2]
+    outputs = 'DOC2939585 NGPDU-92 Shipping and Handling Functional Test Plan.pdf'
+    PDFmerge(pdfs=pdfs, outputs=outputs)
+if __name__=="__main__":
+    main()
