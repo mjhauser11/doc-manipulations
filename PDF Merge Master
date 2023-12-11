@@ -1,0 +1,16 @@
+import PyPDF2
+def PDFmerge(pdfs, outputs):
+    pdfMerger = PyPDF2.PdfMerger()
+    for pdf in pdfs:
+        pdfMerger.append(pdf)
+        with open(outputs,'wb') as f:
+            pdfMerger.write(f)
+def main():
+    pdf1 = r''
+    pdf2 = r''
+    pdf3 = r''
+    pdfs = [pdf1, pdf2, pdf3]
+    outputs = 'Doc_#.pdf'
+    PDFmerge(pdfs=pdfs, outputs=outputs)
+if __name__=="__main__":
+    main()
