@@ -3,7 +3,7 @@ def PDFmerge(pdfs, outputs):
     pdfMerger = PyPDF2.PdfMerger()
     for pdf in pdfs:
         pdfMerger.append(pdf)
-        with open(outputs,'wb') as f:
+        with open("C:\\Users\\223117394\\OneDrive - General Electric International, Inc\\Documents\\PDU\\NGPDU-92\\" + outputs,'wb') as f:
             pdfMerger.write(f)
 def main():
     pdf1 = r'C:\Users\223117394\OneDrive - General Electric International, Inc\Documents\PDU\NGPDU-92\part1final.pdf'
